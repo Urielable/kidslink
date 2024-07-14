@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV['KIDS_LINK_DB_HOST'] %>
+  username: <%= ENV['KIDS_LINK_DB_USERNAME'] %>
+  password: <%= ENV['KIDS_LINK_DB_PASSWORD'] %>
+  database: <%= ENV['KIDS_LINK_DB_NAME'] %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  database: <%= ENV['KIDS_LINK_DB_NAME'] %>_test
+
+production:
+  <<: *default
